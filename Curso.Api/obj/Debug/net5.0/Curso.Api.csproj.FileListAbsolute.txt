@@ -29,3 +29,10 @@ C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\obj\Debug\net5.0\Cur
 C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\obj\Debug\net5.0\Curso.Api.genruntimeconfig.cache
 C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\Curso.Api.xml
 C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\thiag\Documents\Visual Studio 2019\Curso\Curso.Api\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
