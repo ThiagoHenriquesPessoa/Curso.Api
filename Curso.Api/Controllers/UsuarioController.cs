@@ -1,13 +1,18 @@
-﻿using Curso.Api.Filters;
+﻿using Curso.Api.Business.Entities;
+using Curso.Api.Filters;
+using Curso.Api.Infraestruture.Data;
 using Curso.Api.Models;
 using Curso.Api.Models.Usuarios;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Curso.Api.Controllers
 {
@@ -62,9 +67,27 @@ namespace Curso.Api.Controllers
         [HttpPost]
         [Route("registrar")]
         [ValidacaoModelStateCustomizado]
-        public IActionResult Registrar(RegistroViewModelInput registroViewModelInput)
+        public IActionResult Registrar(RegistroViewModelInput loginViewModelInput)
         {
-            return Created("", registroViewModelInput);
+            var optionsBuilder = new DbContextOptionsBuilder<CursoDbContext>();
+            optionsBuilder.UseSqlServer("Server=loalhost;Database=CURSO;user=sa;password=App@223020");
+            CursoDbContext contexto = new CursoDbContext(optionsBuilder.Options);
+
+            var migracoesPendentes = contexto.Database.GetPendingMigrations();
+
+            if (migracoesPendentes.Count() > 0)
+            {
+               contexto.Database.Migrate();
+            }
+
+            var usuario = new Usuario();
+            usuario.Login = loginViewModelInput.Login;
+            usuario.Senha = loginViewModelInput.Senha;
+            usuario.Email = loginViewModelInput.Email;
+            contexto.Usuarios.Add(usuario);
+            contexto.SaveChanges();
+
+            return Created("", loginViewModelInput);
         }
     }
 }
