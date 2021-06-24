@@ -1,4 +1,5 @@
 ﻿using Curso.Api.Business.Entities;
+using Curso.Api.Business.Repositories;
 using Curso.Api.Filters;
 using Curso.Api.Infraestruture.Data;
 using Curso.Api.Models;
@@ -20,7 +21,8 @@ namespace Curso.Api.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        
+        IUsuarioRepository _usuarioRepository;
+
 
         [SwaggerResponse(statusCode: 200, description: "Sucesso ao autenticar", Type = typeof(LoginViewModelInput))]
         [SwaggerResponse(statusCode: 400, description: "Campo obrigatorio", Type = typeof(ValidaCampoViewModelOutput))]
@@ -69,23 +71,23 @@ namespace Curso.Api.Controllers
         [ValidacaoModelStateCustomizado]
         public IActionResult Registrar(RegistroViewModelInput loginViewModelInput)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<CursoDbContext>();
-            optionsBuilder.UseSqlServer("Server=loalhost;Database=CURSO;user=sa;password=App@223020");
-            CursoDbContext contexto = new CursoDbContext(optionsBuilder.Options);
+            //var optionsBuilder = new DbContextOptionsBuilder<CursoDbContext>();
+            //optionsBuilder.UseSqlServer("Server=loalhost;Database=CURSO;user=sa;password=App@223020");
+            //CursoDbContext contexto = new CursoDbContext(optionsBuilder.Options);
 
-            var migracoesPendentes = contexto.Database.GetPendingMigrations();
+            //var migracoesPendentes = contexto.Database.GetPendingMigrations();
 
-            if (migracoesPendentes.Count() > 0)
-            {
-               contexto.Database.Migrate();
-            }
+            //if (migracoesPendentes.Count() > 0)
+            //{
+              // contexto.Database.Migrate();
+            //}
 
             var usuario = new Usuario();
             usuario.Login = loginViewModelInput.Login;
             usuario.Senha = loginViewModelInput.Senha;
-            usuario.Email = loginViewModelInput.Email;
-            contexto.Usuarios.Add(usuario);
-            contexto.SaveChanges();
+            usuario.Email = loginViewModelInput.Email;           
+            _usuarioRepository.Adicionar(usuario);
+            _usuarioRepository.Commit();
 
             return Created("", loginViewModelInput);
         }

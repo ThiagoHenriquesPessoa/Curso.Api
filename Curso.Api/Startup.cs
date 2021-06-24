@@ -1,3 +1,5 @@
+using Curso.Api.Business.Repositories;
+using Curso.Api.Infraestruture.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -80,8 +82,10 @@ namespace Curso.Api
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
-                }
-                );
+                });
+            
+            services.AddScon<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
